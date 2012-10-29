@@ -11,6 +11,9 @@ import com.source3g.wcb.entity.customer.Customer;
 
 @Service
 public class CustomerService {
+	/**
+	 * 在分支中加了几个字
+	 */
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;

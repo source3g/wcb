@@ -25,12 +25,12 @@ public class CustomerApi {
 		customerService.add(customer);
 		return "success";
 	}
-
+	
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Customer> listAll() {
 		List<Customer> list= customerService.listAll();
 		return list;
 	}
-
+	
 }

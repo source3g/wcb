@@ -34,6 +34,6 @@ public class UserController {
 				return session.createTextMessage("send message ");  
 			}
 		});
-		return "eeff";
+		return "OK";
 	}
 }
