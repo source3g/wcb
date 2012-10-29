@@ -15,11 +15,12 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.source3g.wcb.entity.merchant.Merchant;
+import com.source3g.wcb.utils.ConfigParams;
 
 @Controller
 @RequestMapping("/admin/merchant")
 public class MerchantController {
-
+	
 	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public ModelAndView toAdd() {
 		return new ModelAndView("admin/merchant/add");
@@ -32,7 +33,7 @@ public class MerchantController {
 			model.put("errors", errorResult.getAllErrors());
 			return new ModelAndView("admin/merchant/add", model);
 		}
-		String uri = "http://localhost:8080/api/merchant/";
+		String uri = ConfigParams.getBaseUrl()+"merchant/";
 		RestTemplate restTemplate = new RestTemplate();
 		HttpEntity<Merchant> entity = new HttpEntity<Merchant>(merchant);
 		String result = restTemplate.postForObject(uri, entity, String.class);
@@ -47,7 +48,7 @@ public class MerchantController {
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView list() {
-		String uri = "http://localhost:8080/api/merchant/";
+		String uri = ConfigParams.getBaseUrl()+"merchant/";
 		RestTemplate restTemplate = new RestTemplate();
 		Merchant[] merchants = restTemplate.getForObject(uri, Merchant[].class);
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -57,7 +58,7 @@ public class MerchantController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable String id) {
-		String uri = "http://localhost:8080/api/merchant/" + id;
+		String uri =  ConfigParams.getBaseUrl()+"merchant/" + id;
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.delete(uri);
 		return new ModelAndView("redirect:/admin/merchant/list.html");
