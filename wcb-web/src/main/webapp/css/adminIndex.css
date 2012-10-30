@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+
+.container{
+	margin:auto;
+	width: 960px;
+}
+.top{
+	border:1px solid #eee;
+	text-align:center;
+	height: 40px;
+}
+.left{
+	border:1px solid #eee;
+	float:left;
+	width: 220px;
+}
+.right{
+	border:1px solid #eee;
+	width:740px;
+	height: auto;
+}
+.foot{
+	border:1px solid #eee;
+	text-align:center;
+	float:clear;
+}

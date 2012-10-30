@@ -4,24 +4,52 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>管理员后台</title>
+<link href="${pageContext.request.contextPath}/css/adminIndex.css"
+	rel="stylesheet" type="text/css" />
+<title>首页</title>
+<%@include file="include/header.jsp"%>
+<link href="${pageContext.request.contextPath}/css/tree.css"
+	rel="stylesheet" />
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#wenzhang>dd>dl>dd").hide();
+		$.each($("#wenzhang>dd>dl>dt"), function() {
+			$(this).click(function() {
+				$("#wenzhang>dd>dl>dd ").not($(this).next()).slideUp();
+				$(this).next().slideToggle(500);
+			});
+		});
+	});
+
+	function goSpace(obj) {
+		//window.parent.mainFrame.location.href = obj;
+		$("#mainContent").load(obj);
+	}
+</script>
 </head>
-<frameset rows="59,*" cols="*" frameborder="no" border="0"
-	framespacing="0">
-	<frame src="${pageContext.request.contextPath }/jsp/admin/top.jsp"
-		name="topFrame" scrolling="no" noresize="noresize" id="topFrame"
-		title="topFrame" />
-	<frameset cols="213,*" frameborder="no" border="0" framespacing="0">
-		<frame src="${pageContext.request.contextPath }/jsp/admin/left.jsp"
-			name="leftFrame" scrolling="no" noresize="noresize" id="leftFrame"
-			title="leftFrame" />
-		<frame
-			src="${pageContext.request.contextPath }/jsp/admin/main.jsp"
-			name="mainFrame" id="mainFrame" title="mainFrame" />
-	</frameset>
-</frameset>
-<noframes>
-	<body>
-	</body>
-</noframes>
+<body>
+	<div class="container">
+		<div class="top">顶部</div>
+		<div class="left">
+			<dl id="wenzhang">
+				<dd>
+					<dl>
+						<dt>商户管理</dt>
+						<dd>
+							<ul>
+								<li><a
+									href="javascript:goSpace('${pageContext.request.contextPath}/admin/merchant/add.html')">增加商户</a></li>
+								<li><a
+									href="javascript:goSpace('${pageContext.request.contextPath}/admin/merchant/list.html')">查询商户</a></li>
+							</ul>
+						</dd>
+
+					</dl>
+				</dd>
+			</dl>
+		</div>
+		<div class="right" id="mainContent">右侧</div>
+		<div class="foot">底部</div>
+	</div>
+</body>
 </html>
