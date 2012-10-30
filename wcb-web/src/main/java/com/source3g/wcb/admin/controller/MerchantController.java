@@ -5,6 +5,9 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -20,7 +23,11 @@ import com.source3g.wcb.utils.ConfigParams;
 @Controller
 @RequestMapping("/admin/merchant")
 public class MerchantController {
+	private static final Logger logger=LoggerFactory.getLogger(MerchantController.class);
 	
+	@Autowired
+	private RestTemplate restTemplate;
+
 	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public ModelAndView toAdd() {
 		return new ModelAndView("admin/merchant/add");
@@ -34,7 +41,6 @@ public class MerchantController {
 			return new ModelAndView("admin/merchant/add", model);
 		}
 		String uri = ConfigParams.getBaseUrl()+"merchant/";
-		RestTemplate restTemplate = new RestTemplate();
 		HttpEntity<Merchant> entity = new HttpEntity<Merchant>(merchant);
 		String result = restTemplate.postForObject(uri, entity, String.class);
 		if ("\"success\"".equals(result)) {
@@ -48,8 +54,8 @@ public class MerchantController {
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView list() {
+		logger.debug("list.......");
 		String uri = ConfigParams.getBaseUrl()+"merchant/";
-		RestTemplate restTemplate = new RestTemplate();
 		Merchant[] merchants = restTemplate.getForObject(uri, Merchant[].class);
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("merchants", merchants);
@@ -59,7 +65,6 @@ public class MerchantController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable String id) {
 		String uri =  ConfigParams.getBaseUrl()+"merchant/" + id;
-		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.delete(uri);
 		return new ModelAndView("redirect:/admin/merchant/list.html");
 	}
