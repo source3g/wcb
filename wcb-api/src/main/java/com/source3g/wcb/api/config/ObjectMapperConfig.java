@@ -7,6 +7,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ObjectMapperConfig {
 	
+	/**
+	 * 去掉json中的空
+	 * @return
+	 * @throws Exception
+	 */
 	public @Bean ObjectMapper objectMapper() throws Exception{
 		ObjectMapper obj=new ObjectMapper();
 //		obj.getSerializationConfig().withSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
