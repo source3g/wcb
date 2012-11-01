@@ -11,4 +11,11 @@ public class FrontController {
 		return "admin/index";
 	}
 	
+	
+	@RequestMapping(value="/index",method=RequestMethod.GET)
+	public String toMerchant(){
+		return "merchant/index";
+	}
+	
+	
 }

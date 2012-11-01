@@ -5,10 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>查询商户</title>
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../../include/header.jsp"%>
 </head>
 <body>
-	<table border="1" width="100%">
+	<table class="table table-striped table-bordered bootstrap-datatable datatable">
 		<thead>
 			<tr>
 				<th width="30%">名称</th>
@@ -24,6 +24,5 @@
 			</tr>
 		</c:forEach>
 	</table>
-
 </body>
 </html>
